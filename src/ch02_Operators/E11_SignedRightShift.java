@@ -44,6 +44,10 @@ public class E11_SignedRightShift {
 		i >>= 1; System.out.println(Integer.toBinaryString(i));
 		i >>= 1; System.out.println(Integer.toBinaryString(i));
 		i >>= 1; System.out.println(Integer.toBinaryString(i));
-		i = -1; i >>>= 10; System.out.println(Integer.toBinaryString(i));
+        System.out.println("---------------------");
+		i = -1;
+		System.out.println(Integer.toBinaryString(i));
+		i >>>= 10;
+		System.out.println(Integer.toBinaryString(i));
 	}
 }
