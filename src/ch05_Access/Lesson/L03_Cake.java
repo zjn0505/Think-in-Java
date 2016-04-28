@@ -1,11 +1,11 @@
-package ch05_Access.Exercise;
+package ch05_Access.Lesson;
 
 /**
  * Created by Jienan on 2016/4/28.
  */
-class E04_Cake {
+class L03_Cake {
     public static void main(String[] args) {
-        E04_Pie x = new E04_Pie();
+        L03_Pie x = new L03_Pie();
         x.f();
     }
 }

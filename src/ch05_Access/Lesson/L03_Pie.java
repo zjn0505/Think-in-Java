@@ -1,9 +1,9 @@
-package ch05_Access.Exercise;
+package ch05_Access.Lesson;
 
 /**
  * Created by Jienan on 2016/4/28.
  */
-class E04_Pie {
+class L03_Pie {
     void f() {
         System.out.println("Pie.f()");
     }
