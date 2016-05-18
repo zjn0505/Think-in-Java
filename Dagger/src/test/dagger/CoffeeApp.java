@@ -18,6 +18,7 @@ public class CoffeeApp implements Runnable {
     public void run() {
         coffeeMaker.brew();
         coffeeServer.prepare(2);
+        coffeeServer.prepareVIP(2);
     }
 
     public static void main(String[] args) {

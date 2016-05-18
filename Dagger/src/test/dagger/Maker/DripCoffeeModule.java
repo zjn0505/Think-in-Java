@@ -8,10 +8,10 @@ import javax.inject.Named;
 import javax.inject.Singleton;
 
 @Module(
-        injects = {
-                CoffeeApp.class,
-                ElectricHeater.class
-        },
+//        injects = {
+//                CoffeeApp.class,
+//                ElectricHeater.class
+//        },
         includes = PumpModule.class
 )
 public class DripCoffeeModule {

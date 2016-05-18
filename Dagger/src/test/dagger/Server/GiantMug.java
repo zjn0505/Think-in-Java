@@ -7,7 +7,7 @@ import javax.inject.Singleton;
  * Created by Jienan on 2016/5/17.
  */
 @Singleton
-public class GiantMug implements Cup {
+class GiantMug implements Cup {
 
     @Inject
     GiantMug() {

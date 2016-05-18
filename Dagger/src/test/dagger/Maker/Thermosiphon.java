@@ -3,7 +3,7 @@ package test.dagger.maker;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-public class Thermosiphon implements Pump {
+class Thermosiphon implements Pump {
     private final Heater heater;
 
     @Inject

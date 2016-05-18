@@ -1,5 +1,5 @@
 package test.dagger.maker;
 
-public interface Pump {
+interface Pump {
     void pump();
 }
