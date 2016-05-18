@@ -1,12 +1,13 @@
 package test.dagger;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 
 class Thermosiphon implements Pump {
   private final Heater heater;
 
   @Inject
-  Thermosiphon(Heater heater) {
+  Thermosiphon(@Named("Good")Heater heater) {
     this.heater = heater;
   }
 
