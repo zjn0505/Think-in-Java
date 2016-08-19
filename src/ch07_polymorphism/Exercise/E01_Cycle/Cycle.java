@@ -1,4 +1,4 @@
-package ch07_polymorphism.Exercise.E01_Cycle;
+package ch07_polymorphism.Exercise.E01_cycle;
 
 /**
  * Created by Jienan on 2016/8/16.

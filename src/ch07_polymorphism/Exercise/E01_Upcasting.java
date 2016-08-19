@@ -4,10 +4,10 @@ package ch07_polymorphism.Exercise;
  * Created by Jienan on 2016/8/16.
  */
 
-import ch07_polymorphism.Exercise.E01_Cycle.Bicycle;
-import ch07_polymorphism.Exercise.E01_Cycle.Cycle;
-import ch07_polymorphism.Exercise.E01_Cycle.Tricycle;
-import ch07_polymorphism.Exercise.E01_Cycle.Unicycle;
+import ch07_polymorphism.Exercise.E01_cycle.Bicycle;
+import ch07_polymorphism.Exercise.E01_cycle.Cycle;
+import ch07_polymorphism.Exercise.E01_cycle.Tricycle;
+import ch07_polymorphism.Exercise.E01_cycle.Unicycle;
 
 /****************** Exercise 1 ****************
  * Create a Cycle class, with subclasses
