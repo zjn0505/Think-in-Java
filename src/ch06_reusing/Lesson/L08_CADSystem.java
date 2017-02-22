@@ -1,8 +1,6 @@
 package ch06_reusing.Lesson;
 
 
-import com.sun.tools.javadoc.Start;
-
 /**
  * Created by jienanzhang on 6/26/16.
  */
