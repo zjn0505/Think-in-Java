@@ -19,9 +19,9 @@ public class L06_AsListInference {
                 new Crusty(), new Slush(), new Powder()
         );
         // Doesn't allow before JDK8, since it will return List<Powder>
-        List<Snow> snow2 = Arrays.asList(
-                new Light(), new Heavy()
-        );
+//        List<Snow> snow2 = Arrays.asList(
+//                new Light(), new Heavy()
+//        );
         List<Snow> snow3 = new ArrayList<Snow>();
         Collections.addAll(snow3, new Light(), new Heavy());
 
