@@ -4,10 +4,7 @@ package ch10_holding.Exercise;
  * Created by Jienan on 2017/2/23.
  */
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 /****************** Exercise 5 ******************
  * Use Integers instead of Pets to modify
@@ -35,5 +32,38 @@ public class E05_IntegerListFeatures {
         System.out.println("8: " + ints);
         ints.add(3, 0);
         System.out.println("9: " + ints);
+        List<Integer> sub = ints.subList(1, 4);
+        System.out.println("subList: " + sub);
+        System.out.println("10: " + ints.containsAll(sub));
+        Collections.sort(sub);
+        System.out.println("sorted subList: " + sub);
+        System.out.println("11: " + ints.containsAll(sub));
+        Collections.shuffle(sub, rand);
+        System.out.println("shuffled subList: " + sub);
+        System.out.println("12: " + ints.containsAll(sub));
+        List<Integer> copy = new ArrayList<Integer>(ints);
+        sub = Arrays.asList(ints.get(1), ints.get(4));
+        System.out.println("sub: " + sub);
+        copy.retainAll(sub);
+        System.out.println("13: " + copy);
+        copy = new ArrayList<Integer>(ints);
+        copy.remove(2);
+        System.out.println("14: " + copy);
+        copy.removeAll(sub);
+        System.out.println("15: " + copy);
+        copy.set(1, 9);
+        System.out.println("16: " + copy);
+        copy.addAll(2, sub);
+        System.out.println("17: " + copy);
+        System.out.println("18: " + ints.isEmpty());
+        ints.clear();
+        System.out.println("19: " + ints);
+        System.out.println("20: " + ints.isEmpty());
+        ints.addAll(Arrays.asList(1, 2, 3, 4));
+        System.out.println("21: " + ints);
+        Object[] o = ints.toArray();
+        System.out.println("22: " + o[3]);
+        Integer[] ia = ints.toArray(new Integer[0]);
+        System.out.println("22: " + ia[3]);
     }
 }
