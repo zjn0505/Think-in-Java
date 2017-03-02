@@ -4,6 +4,8 @@ package ch10_holding.Exercise;
  * Created by Jienan on 2017/3/1.
  */
 
+import net.mindview.util.TextFile;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -20,13 +22,12 @@ import java.util.Map;
  * word was found.
  ***********************************************/
 public class E25_WordsInfo3 {
-    //TODO require TextFile lib
-/*    public static void main(String[] args) {
+    public static void main(String[] args) {
         Map<String, ArrayList<Integer>> stat =
                 new HashMap<String, ArrayList<Integer>>();
         int wordCount = 0;
         for(String word :
-                new TextFile("E25_WordsInfo3.java", "\\W+")) {
+                new TextFile("src\\ch10_holding\\Exercise\\E25_WordsInfo3.java", "\\W+")) {
             ArrayList<Integer> loc = stat.get(word);
             if(loc == null) {
                 loc = new ArrayList<Integer>();
@@ -35,5 +36,5 @@ public class E25_WordsInfo3 {
             loc.add(++wordCount);
         }
         System.out.println(stat);
-    }*/
+    }
 }

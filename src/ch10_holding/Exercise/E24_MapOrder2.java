@@ -4,6 +4,8 @@ package ch10_holding.Exercise;
  * Created by Jienan on 2017/3/1.
  */
 
+import net.mindview.util.Countries;
+
 import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -14,9 +16,8 @@ import java.util.Map;
  * re-insert them into the Map.
  *********************************************************/
 public class E24_MapOrder2 {
-    /*
+
     public static void main(String[] args) {
-        // TODO require Countries module
         Map<String, String> m1 = new LinkedHashMap<String, String>(Countries.capitals(25));
         System.out.println(m1);
         String[] keys = m1.keySet().toArray(new String[0]);
@@ -26,5 +27,5 @@ public class E24_MapOrder2 {
             m2.put(key, m1.get(key));
         System.out.println(m2);
     }
-     */
+
 }

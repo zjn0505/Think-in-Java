@@ -69,5 +69,6 @@ public class E23_MoreProbable {
         }
         Collections.sort(lst);
         System.out.println("lst = " + lst);
+
     }
 }

@@ -1,5 +1,7 @@
 package ch10_holding.Lesson;
 
+import net.mindview.util.TextFile;
+
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -11,9 +13,8 @@ import java.util.TreeSet;
 
 public class L19_UniqueWordsAlphabetic {
     public static void main(String[] args) {
-        // TODO need import TextFile lib
         Set<String> words = new TreeSet<String>(String.CASE_INSENSITIVE_ORDER);
-//        words.addAll(new TextFile("SetOperations.java", "\\W+"));
+        words.addAll(new TextFile("src\\ch10_holding\\Lesson\\L17_SetOperations.java", "\\W+"));
         System.out.println(words);
     }
 }
