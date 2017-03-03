@@ -4,7 +4,12 @@ package ch10_holding.Exercise;
  * Created by Jienan on 2017/2/28.
  */
 
+import net.mindview.util.Countries;
+
+import java.lang.reflect.Array;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 /******************* Exercise 18 ************************
@@ -14,9 +19,15 @@ import java.util.Map;
  * Show that insertion order is maintained.
  *******************************************************/
 public class E18_MapOrder {
-    // TODO Contries class
     public static void main(String[] args) {
-//        Map<String, String> m1 =
-//                new HashMap<String, String>(Countries.)
+        Map<String, String> m1 =
+                new HashMap<String, String>(Countries.capitals(25));
+        System.out.println(m1);
+        String[] keys = m1.keySet().toArray(new String[0]);
+        Arrays.sort(keys);
+        Map<String, String> m2 = new LinkedHashMap<String, String>();
+        for (String key : keys)
+            m2.put(key, m1.get(key));
+        System.out.println(m2);
     }
 }

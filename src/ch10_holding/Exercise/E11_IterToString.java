@@ -29,8 +29,7 @@ public class E11_IterToString {
                         new TreeSet<String>()
                 );
         for (Collection<String> c : ca) {
-            // TODO
-//            E04_MovieNameGenerator.fill(c)
+            E04_MovieNameGenerator.fill(c);
         }
 
         for (Collection<String> c : ca)
