@@ -7,6 +7,7 @@ package ch10_holding.Exercise;
 import typeinfo.pets.Pet;
 import typeinfo.pets.Pets;
 
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Iterator;
 
@@ -127,4 +128,12 @@ class CollectionSequence2 extends PetSequence implements Collection<Pet> {
 }
 
 public class E30_CollectionSequence2 {
+    public static void main(String[] args) {
+        CollectionSequence2 c = new CollectionSequence2();
+        CollectionSequence2.display(c);
+        CollectionSequence2.display(c.iterator());
+        System.out.println(
+                Arrays.toString(c.toArray(new Pet[0]))
+        );
+    }
 }
