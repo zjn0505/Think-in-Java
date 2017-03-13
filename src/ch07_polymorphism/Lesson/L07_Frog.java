@@ -69,7 +69,7 @@ class Amphibian extends Animal {
 public class L07_Frog extends Amphibian {
     private Characteristic p = new Characteristic("Croaks");
     private Description t = new Description("Eats Bugs");
-    L07_Frog() {
+    public L07_Frog() {
         System.out.println("Frog()");
     }
     protected void dispose() {
