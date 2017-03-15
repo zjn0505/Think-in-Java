@@ -1,23 +1,26 @@
-package ch11_exceptions.Lesson;
+package ch11_exceptions.Exercise;
 
 /**
- * Created by Jienan on 2017/3/14.
+ * Created by Jienan on 2017/3/15.
  */
-
-// Overridden methods may throw only the exceptions
-// specified in their base-class version, or exceptions
-// derived from the base-class exceptions.
-
+/****************** Exercise 20 *****************
+ * Modify StormyInning.java by adding an
+ * UmpireArgument exception type and methods
+ * that throw this exception. Test the modified
+ * hierarchy.
+ ***********************************************/
 class BaseballException extends Exception {}
 class Foul extends BaseballException {}
 class Strike extends BaseballException {}
+class UmpireArgument extends BaseballException {}
 
 abstract class Inning {
     public Inning() throws BaseballException {}
     public void event() throws BaseballException {
         // Doesn't actually have to throw anything
     }
-    public abstract void atBat() throws Strike, Foul;
+    public abstract void atBat() throws Strike, Foul, UmpireArgument;
+    abstract void decision() throws UmpireArgument;
     public void walk() {} // Throws no checked exception
 }
 
@@ -30,11 +33,11 @@ interface Storm {
     public void rainHard() throws RainedOut;
 }
 
-public class L18_StormyInning extends Inning implements Storm {
+class StormyInning extends Inning implements Storm {
     // OK to add new exceptions for constructors, but you
     // mast deal with the base constructor exceptions
-    public L18_StormyInning() throws RainedOut, BaseballException {}
-    public L18_StormyInning(String s) throws RainedOut, BaseballException {}
+    public StormyInning() throws RainedOut, BaseballException {}
+    public StormyInning(String s) throws RainedOut, BaseballException {}
     // Regular methods must conform to base class:
 //!    void walk() throws PopFoul {}
     //  Interface CANNOT add exceptions to existing
@@ -47,11 +50,17 @@ public class L18_StormyInning extends Inning implements Storm {
     // even if the base fversion does:
     public void event() {}
     // Overridden methods can throw inherited exceptions:
-    public void atBat() throws PopFoul {}
-
+    public void atBat() throws PopFoul, UmpireArgument {
+        throw new UmpireArgument();
+    }
+    void decision() throws UmpireArgument {
+        throw new UmpireArgument();
+    }
+}
+public class E20_UmpireArgument {
     public static void main(String[] args) {
         try {
-            L18_StormyInning si = new L18_StormyInning();
+            StormyInning si = new StormyInning();
             si.atBat();
         } catch (PopFoul e) {
             System.out.println("Pop foul");
@@ -63,7 +72,7 @@ public class L18_StormyInning extends Inning implements Storm {
 
         try {
             // What happens if you upcast?
-            Inning i = new L18_StormyInning();
+            Inning i = new StormyInning();
             i.atBat();
         } catch (Strike e) {
             System.out.println("Strike");
@@ -74,9 +83,21 @@ public class L18_StormyInning extends Inning implements Storm {
         } catch (BaseballException e) {
             System.out.println("Generic baseball exception");
         }
+
+        // Or you can add code to catch the
+        // specific type of exception:
+        try {
+            StormyInning si = new StormyInning();
+            si.atBat();
+            si.decision();
+        } catch (PopFoul popFoul) {
+            popFoul.printStackTrace();
+        } catch (UmpireArgument umpireArgument) {
+            umpireArgument.printStackTrace();
+        } catch (BaseballException e) {
+            e.printStackTrace();
+        } catch (RainedOut rainedOut) {
+            rainedOut.printStackTrace();
+        }
     }
-
-
-
-
 }
