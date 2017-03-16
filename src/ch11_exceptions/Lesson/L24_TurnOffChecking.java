@@ -26,7 +26,7 @@ class WrapCheckedException {
 
 class SomeOtherException extends Exception {}
 
-public class L24_TurnOffCHecking {
+public class L24_TurnOffChecking {
     public static void main(String[] args) {
         WrapCheckedException wce = new WrapCheckedException();
         // You can call throwRuntimeException without a try block
