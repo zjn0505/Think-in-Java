@@ -27,3 +27,8 @@ public class E12_Groups2 {
         System.out.println(words.toString());
     }
 }
+
+/**
+ * (?!X) Match X, via zero-width negative lookahead
+ * \b    Word boundary
+ */

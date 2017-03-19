@@ -28,3 +28,10 @@ public class L18_Groups {
         }
     }
 }
+
+/**
+ *  (?m) multiline mode
+ *  $ end of line
+ *
+ *  Find and print into group last three words in line
+ */
