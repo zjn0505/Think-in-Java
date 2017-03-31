@@ -31,5 +31,6 @@ public class E10_PrimitiveOrTrue {
         // Multi-dimensional arrays:
         int[][][] threed = new int[3][][];
         System.out.println("threed.getClass() = " + threed.getClass());
+        //! Class<Number> genericNumberClass = int.class;
     }
 }

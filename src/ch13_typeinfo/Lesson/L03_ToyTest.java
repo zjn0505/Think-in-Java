@@ -1,4 +1,4 @@
-package ch13_typeinfo.Lesson.toys;
+package ch13_typeinfo.Lesson;
 
 /**
  * Created by jienanzhang on 28/03/2017.
@@ -31,7 +31,7 @@ public class L03_ToyTest {
     public static void main(String[] args) {
         Class c = null;
         try {
-            c = Class.forName("ch13_typeinfo.Lesson.toys.FancyToy");
+            c = Class.forName("ch13_typeinfo.Lesson.FancyToy");
         } catch (ClassNotFoundException e) {
             System.out.println("Can't find FancyToy");
             System.exit(1);
