@@ -6,6 +6,7 @@ package ch14_generics.Lesson;
 public class L01_Holder3<T> {
     private T a;
     public L01_Holder3(T a) { this.a = a; }
+
     public void set(T a) { this.a = a; }
     public T get() { return a; }
 
