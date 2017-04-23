@@ -14,7 +14,7 @@ public class L08_LimitsOfInference {
     static void f(Map<Person, List<? extends Pet>> petPeople) {}
 
     public static void main(String[] args) {
-        f(New.map());
+        // f(New.map());
     }
 }
 // It's OK in JDK 1.8

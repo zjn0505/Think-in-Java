@@ -1,7 +1,8 @@
 package ch14_generics.Lesson;
 
-import ch13_typeinfo.Exercise.E16_CoffeeGenerator;
-import ch13_typeinfo.Exercise.E16_coffee2.Coffee;
+
+import ch14_generics.Lesson.L05_coffee.Coffee;
+import ch14_generics.Lesson.L05_coffee.CoffeeGenerator;
 import net.mindview.util.Generator;
 
 import java.util.ArrayList;
@@ -19,7 +20,7 @@ public class L10_Generators {
     }
 
     public static void main(String[] args) {
-        Collection<Coffee> coffee = fill(new ArrayList<Coffee>(), new E16_CoffeeGenerator(), 4);
+        Collection<Coffee> coffee = fill(new ArrayList<Coffee>(), new CoffeeGenerator(), 4);
         for (Coffee c : coffee)
             System.out.println(c);
         Collection<Integer> fnumbers = fill(new ArrayList<Integer>(), new L06_Fibonacci(), 12);
