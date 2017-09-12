@@ -11,8 +11,21 @@ public class MyBoard extends Board implements IBattle{
     private final static int ORI_S = 3;
     private final static int ORI_W = 4;
 
+    public static void main(String[] args) {
+        MyBoard board = new MyBoard();
+        try {
+            board.addPlaneToBoard(new Plane(9, 7, 8, 7));
+        } catch (BoardSetException e) {
+            e.printStackTrace();
+        } catch (Plane.InvalidPlaneException e) {
+            e.printStackTrace();
+        } catch (Position.InvalidPositionException e) {
+            e.printStackTrace();
+        }
+        board.printBoard();
+    }
 
-    public MyCell[][] myCells = new MyCell[9][9];
+
 
     public void resetBoards(Plane[] planes) {
         if (!initBoardWithPlanes(planes)) {
@@ -30,7 +43,7 @@ public class MyBoard extends Board implements IBattle{
                 } else if (state == MyCell.PLANE_HEAD) {
                     s += "O";
                 } else if (state == MyCell.PLANE_PART) {
-                    s += "X";
+                    s += "row";
                 }
             }
             s += "\n";
@@ -40,9 +53,9 @@ public class MyBoard extends Board implements IBattle{
 
     @Override
     public FireResult hit(Position p) {
-        if (myCells[p.X-START_POS][p.Y-START_POS] == MyCell.EMPTY) {
+        if (myCells[p.row-START_POS][p.col-START_POS] == MyCell.EMPTY) {
             return FireResult.MISS;
-        } else if (myCells[p.X-START_POS][p.Y-START_POS] == MyCell.PLANE_PART) {
+        } else if (myCells[p.row-START_POS][p.col-START_POS] == MyCell.PLANE_PART) {
             return FireResult.HIT;
         } else {
             return FireResult.DESTROYED;
@@ -55,19 +68,7 @@ public class MyBoard extends Board implements IBattle{
     }
 
 
-
-
-
-
-
-
     public boolean initBoardWithPlanes(Plane[] planes) {
-        myCells = new MyCell[9][9];
-        for (int i = 0; i < 9; i++) {
-            for (int j = 0; j < 9; j++) {
-                myCells[i][j] = MyCell.EMPTY;
-            }
-        }
         try {
 
             if (planes.length != 3) {
@@ -85,59 +86,8 @@ public class MyBoard extends Board implements IBattle{
     }
 
     private void addPlaneToBoard(Plane plane) throws BoardSetException{
-        Position head = plane.head;
-        Position heart = plane.heart;
-        int x = head.X;
-        int y = head.Y;
-        int orient = checkOrient(head, heart);
-        if (ORI_INVALID == orient) {
-            throw new BoardSetException("The plane set is invalid, plane position out of board.");
-        }
-        if (!isCellTaken(x, y)) {
-            myCells[x-START_POS][y-START_POS] = MyCell.PLANE_HEAD;
-        } else {
-            throw new BoardSetException("The plane set is invalid, overlapped planes.");
-        }
-        if (ORI_N == orient) {
-            addCellToBoard(x, y+1);
-            addCellToBoard(x-2, y+1);
-            addCellToBoard(x-1, y+1);
-            addCellToBoard(x+1, y+1);
-            addCellToBoard(x+2, y+1);
-            addCellToBoard(x, y+2);
-            addCellToBoard(x, y+3);
-            addCellToBoard(x-1, y+3);
-            addCellToBoard(x+1, y+3);
-        } else if (ORI_E == orient) {
-            addCellToBoard(x-1, y);
-            addCellToBoard(x-1, y-2);
-            addCellToBoard(x-1, y-1);
-            addCellToBoard(x-1, y+1);
-            addCellToBoard(x-1, y+2);
-            addCellToBoard(x-2, y);
-            addCellToBoard(x-3, y);
-            addCellToBoard(x-3, y-1);
-            addCellToBoard(x-3, y+1);
-        } else if (ORI_S == orient) {
-            addCellToBoard(x, y-1);
-            addCellToBoard(x-2, y-1);
-            addCellToBoard(x-1, y-1);
-            addCellToBoard(x+1, y-1);
-            addCellToBoard(x+2, y-1);
-            addCellToBoard(x, y-2);
-            addCellToBoard(x, y-3);
-            addCellToBoard(x-1, y-3);
-            addCellToBoard(x+1, y-3);
-        } else if (ORI_W == orient) {
-            addCellToBoard(x+1, y);
-            addCellToBoard(x+1, y-2);
-            addCellToBoard(x+1, y-1);
-            addCellToBoard(x+1, y+1);
-            addCellToBoard(x+1, y+2);
-            addCellToBoard(x+2, y);
-            addCellToBoard(x+3, y);
-            addCellToBoard(x+3, y-1);
-            addCellToBoard(x+3, y+1);
+        for (Position position : plane.body) {
+            addCellToBoard(position.row, position.col);
         }
     }
 
@@ -166,16 +116,16 @@ public class MyBoard extends Board implements IBattle{
      **/
     public int checkOrient(Position head, Position heart) {
         int orient = ORI_INVALID;
-        if (head.X == heart.X && head.X >= START_POS+2 && head.X <= 9 - (3-START_POS)) {
-            if (head.Y < heart.Y && head.Y >= START_POS && head.Y <= 9 - (4-START_POS)) {
+        if (head.row == heart.row && head.row >= START_POS+2 && head.row <= 9 - (3-START_POS)) {
+            if (head.col < heart.col && head.col >= START_POS && head.col <= 9 - (4-START_POS)) {
                 orient = ORI_N;
-            } else if (head.Y > heart.Y && head.Y >= (5-START_POS) && head.Y <= 9 - (1-START_POS)) {
+            } else if (head.col > heart.col && head.col >= (5-START_POS) && head.col <= 9 - (1-START_POS)) {
                 orient = ORI_S;
             }
-        } else if (head.Y == heart.Y && head.Y >= START_POS + 2 && head.Y <= 9 - (3 - START_POS)) {
-            if (head.X < heart.X && head.X >= START_POS && head.X <= 9 - (4-START_POS)) {
+        } else if (head.col == heart.col && head.col >= START_POS + 2 && head.col <= 9 - (3 - START_POS)) {
+            if (head.row < heart.row && head.row >= START_POS && head.row <= 9 - (4-START_POS)) {
                 orient = ORI_W;
-            } else if (head.X > heart.X && head.X >= (5-START_POS) && head.X <= 9 - (1-START_POS)) {
+            } else if (head.row > heart.row && head.row >= (5-START_POS) && head.row <= 9 - (1-START_POS)) {
                 orient = ORI_E;
             }
         }

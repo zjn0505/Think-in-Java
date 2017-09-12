@@ -63,23 +63,23 @@ public class ComputeBoard {
     }
 
     private static void createPlaneWithHead(int i, int j) {
-        Position head = new Position(i, j);
-        Position heartN = new Position(i, j-1);
-        Position heartE = new Position(i+1, j);
-        Position heartS = new Position(i, j+1);
-        Position heartW = new Position(i-1, j);
-
-        if (myBoard.checkOrient(head, heartN) != 0) {
-            planes.add(new Plane(head, heartN));
-        }
-        if (myBoard.checkOrient(head, heartE) != 0) {
-            planes.add(new Plane(head, heartE));
-        }
-        if (myBoard.checkOrient(head, heartS) != 0) {
-            planes.add(new Plane(head, heartS));
-        }
-        if (myBoard.checkOrient(head, heartW) != 0) {
-            planes.add(new Plane(head, heartW));
-        }
+//        Position head = new Position(i, j);
+//        Position heartN = new Position(i, j-1);
+//        Position heartE = new Position(i+1, j);
+//        Position heartS = new Position(i, j+1);
+//        Position heartW = new Position(i-1, j);
+//
+//        if (myBoard.checkOrient(head, heartN) != 0) {
+//            planes.add(new Plane(head, heartN));
+//        }
+//        if (myBoard.checkOrient(head, heartE) != 0) {
+//            planes.add(new Plane(head, heartE));
+//        }
+//        if (myBoard.checkOrient(head, heartS) != 0) {
+//            planes.add(new Plane(head, heartS));
+//        }
+//        if (myBoard.checkOrient(head, heartW) != 0) {
+//            planes.add(new Plane(head, heartW));
+//        }
     }
 }
