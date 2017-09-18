@@ -6,6 +6,14 @@ public class Position {
     public int col;
     public boolean hit = false;
 
+    public static Position getPosition(int rowCol) {
+        try {
+            return new Position(rowCol);
+        } catch (InvalidPositionException e) {
+            return null;
+        }
+    }
+
     public Position(int rowCol) throws InvalidPositionException {
         boolean isValid = false;
         if (rowCol < 100 && rowCol > 10) {

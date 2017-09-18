@@ -4,5 +4,8 @@
 public enum FireResult {
     MISS,
     HIT,
-    DESTROYED;
+    DESTROYED,
+    DUPLICATED,
+    INVALID;
+
 }

@@ -43,6 +43,8 @@ public class MyBoard extends Board implements IBattle{
                     s += "H";
                 } else if (state == MyCell.PLANE_PART) {
                     s += "O";
+                } else if (state == MyCell.PLANE_BROKEN) {
+                    s += "O";
                 }
             }
             s += "\n";
@@ -55,9 +57,24 @@ public class MyBoard extends Board implements IBattle{
         if (myCells[p.row-START_POS][p.col-START_POS] == MyCell.EMPTY) {
             return FireResult.MISS;
         } else if (myCells[p.row-START_POS][p.col-START_POS] == MyCell.PLANE_PART) {
+            myCells[p.row-START_POS][p.col-START_POS] = MyCell.PLANE_BROKEN;
             return FireResult.HIT;
+        } else if (myCells[p.row-START_POS][p.col-START_POS] == MyCell.PLANE_HEAD) {
+            myCells[p.row-START_POS][p.col-START_POS] = MyCell.PLANE_BROKEN;
+            for (Plane plane : planes) {
+                if (plane.head.equals(p)) {
+                    plane.destroyed = true;
+                }
+            }
+            if (planes[0].destroyed && planes[1].destroyed && planes[2].destroyed) {
+                return FireResult.DESTROYED;
+            } else {
+                return FireResult.HIT;
+            }
+        } else if (myCells[p.row-START_POS][p.col-START_POS] == MyCell.PLANE_BROKEN) {
+            return FireResult.DUPLICATED;
         } else {
-            return FireResult.DESTROYED;
+            return FireResult.INVALID;
         }
     }
 
@@ -82,6 +99,7 @@ public class MyBoard extends Board implements IBattle{
         }
         return true;
     }
+
 
     public static Board getBoard(Plane[] planesParams) {
         MyBoard myBoard = new MyBoard();

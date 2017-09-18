@@ -21,13 +21,17 @@ public class ComputeBoard {
 
     public static void main(String[] args) {
         myBoard = new MyBoard();
-//        try{
-//            PrintWriter writer = new PrintWriter("BoardStatus.txt", "UTF-8");
+        try{
+            PrintWriter writer = new PrintWriter("BoardStatus.txt", "UTF-8");
 
-            ArrayList<String> hitProfile = new ArrayList<>();
-            ArrayList<String> missProfile = new ArrayList<>();
-//            missProfile.add("79");
-//            missProfile.add("46");
+            ArrayList<String> hitProfile = new ArrayList<String>();
+            ArrayList<String> missProfile = new ArrayList<String>();
+//            missProfile.add("44");
+//            missProfile.add("34");
+//            hitProfile.add("54");
+//            missProfile.add("43");
+//            missProfile.add("61");
+//            hitProfile.add("83");
 //            hitProfile.add("66");
 //            hitProfile.add("93");
 //            hitProfile.add("67");
@@ -56,7 +60,7 @@ public class ComputeBoard {
                 Plane p3 = planes[2];
                 String s = p1.toString()+","+p2.toString()+","+ p3.toString();
                 System.out.println(s);
-//                writer.write(s+"\n");
+                writer.write(s+"\n");
             }
 
             System.out.println("Available planes count : " + planeList.size());
@@ -68,11 +72,12 @@ public class ComputeBoard {
                 }
                 System.out.print(String.format("%3d ", predictHeadList.get(i)));
             }
-//            writer.close();
+            System.out.println();
+            writer.close();
 
-//        } catch (IOException e) {
-//            // do something
-//        }
+        } catch (IOException e) {
+            // do something
+        }
     }
 
 
@@ -84,7 +89,7 @@ public class ComputeBoard {
      * @return
      */
     public static ArrayList<Plane> createPlaneList(@Nullable ArrayList<String> missProfile) {
-        ArrayList<Plane> planes = new ArrayList<>();
+        ArrayList<Plane> planes = new ArrayList<Plane>();
         for (int i = 1; i < 10; i++) {
             for (int j = 1; j < 10; j++) {
                 if (i < 3 && j < 3)
@@ -139,7 +144,7 @@ public class ComputeBoard {
      * @return
      */
     public static ArrayList<Board> createBoardList(@NotNull ArrayList<Plane> planes, @Nullable ArrayList<String> hitProfile) {
-        ArrayList<Board> boards = new ArrayList<>();
+        ArrayList<Board> boards = new ArrayList<Board>();
         int possiblePlanesCount = planes.size();
         for (int i = 0; i < possiblePlanesCount - 2; i++) {
             for (int j = i+1; j < possiblePlanesCount - 1; j++) {
@@ -149,13 +154,16 @@ public class ComputeBoard {
                     Plane p3 = planes.get(k);
                     Plane[] pArray = {p1, p2, p3};
                     Board board = MyBoard.getBoard(pArray);
+                    if (i == 23 && j == 52 && k == 53) {
+                        System.out.println("here");
+                    }
                     if (board != null) {
                         boolean isValid = true;
                         if (hitProfile != null && hitProfile.size() > 0) {
                             for (String s : hitProfile) {
                                 int row = Integer.valueOf(s.substring(0,1));
                                 int col = Integer.valueOf(s.substring(1,2));
-                                if (board.myCells[row-1][col-1] != MyCell.PLANE_PART) {
+                                if (board.myCells[row-1][col-1] != MyCell.PLANE_PART && board.myCells[row-1][col-1] != MyCell.PLANE_HEAD) {
                                     isValid = false;
                                     break;
                                 }

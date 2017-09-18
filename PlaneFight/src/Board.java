@@ -14,11 +14,16 @@ public class Board {
         }
     }
     public boolean addPlane(Plane plane) {
-        for (Position p : plane.body) {
+        for (int i = 0; i < plane.body.size(); i++) {
+            Position p = plane.body.get(i);
             if (myCells[p.row-1][p.col-1] != MyCell.EMPTY) {
                 return false;
             }
-            myCells[p.row-1][p.col-1] = MyCell.PLANE_PART;
+            if (i == 0) {
+                myCells[p.row-1][p.col-1] = MyCell.PLANE_HEAD;
+            } else {
+                myCells[p.row - 1][p.col - 1] = MyCell.PLANE_PART;
+            }
         }
         return true;
     }

@@ -7,11 +7,11 @@ import java.util.List;
 public class Plane {
     public Position head;
     public Position heart;
-    public List<Position> body = new ArrayList<>(10);
+    public List<Position> body = new ArrayList<Position>(10);
     public Vector vectorLeft;
     public Vector vectorRight;
     public Vector vectorEnd;
-
+    public boolean destroyed = false;
 
     public static Plane build(String hhString) {
         int head = Integer.valueOf(hhString.split("\\|")[0]);
