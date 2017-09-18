@@ -6,6 +6,24 @@ public class Position {
     public int col;
     public boolean hit = false;
 
+    public Position(int rowCol) throws InvalidPositionException {
+        boolean isValid = false;
+        if (rowCol < 100 && rowCol > 10) {
+            int row = rowCol / 10;
+            int col = rowCol % 10;
+            if (row != 0 && col != 0) {
+                this.row = row;
+                this.col = col;
+                if (isValid(row) && isValid(col)) {
+                    isValid = true;
+                }
+            }
+        }
+        if (!isValid) {
+            throw new InvalidPositionException();
+        }
+    }
+
     public Position(int row, int col) throws InvalidPositionException {
         this.row = row;
         this.col = col;
@@ -20,8 +38,7 @@ public class Position {
 
     @Override
     public String toString() {
-        String s = String.format("R%dC%d", row, col);
-        return s;
+        return String.format("%d%d", row, col);
     }
 
     public int[] checkDistance(Position p) {
@@ -47,7 +64,7 @@ public class Position {
         return (n > 0 && n < 10);
     }
 
-    public class InvalidPositionException extends Exception {
+    public class InvalidPositionException extends BoardException {
         InvalidPositionException() {
             super(String.format("Invalid position of Row : %d, Column : %d !", row, col));
         }

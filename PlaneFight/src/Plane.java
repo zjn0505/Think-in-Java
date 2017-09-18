@@ -13,22 +13,59 @@ public class Plane {
     public Vector vectorEnd;
 
 
-    /*
-                 head
-         L1  L2  heart  R2  R1
-                  c3
-              L3  c4   L3
+    public static Plane build(String hhString) {
+        int head = Integer.valueOf(hhString.split("\\|")[0]);
+        int heart = Integer.valueOf(hhString.split("\\|")[1]);
+        Plane p;
+        try {
+            p = new Plane(head, heart);
+        } catch (BoardException e) {
+            e.printStackTrace();
+            return null;
+        }
+        return p;
+    }
 
-           <-- VectorLeft
-            |   VectorEnd
-           \|/
+    public static Plane build(int headRow, int headCol, int heartRow, int heartCol) {
+
+        Plane p;
+        try {
+            p = new Plane(new Position(headRow, headCol), new Position(heartRow, heartCol));
+        } catch (BoardException e) {
+//            e.printStackTrace();
+            return null;
+        }
+        return p;
+    }
+
+    /**
+     *
+     * @param hhString 98|97
      */
+    public Plane(String hhString) throws BoardException {
+        this(Integer.valueOf(hhString.split("\\|")[0]), Integer.valueOf(hhString.split("\\|")[1]));
 
-    public Plane(int headRow, int headCol, int heartRow, int heartCol) throws InvalidPlaneException, Position.InvalidPositionException {
+    }
+
+    public Plane(int rowColHead, int rowColHeart) throws BoardException {
+        this(new Position(rowColHead), new Position(rowColHeart));
+    }
+
+    public Plane(int headRow, int headCol, int heartRow, int heartCol) throws BoardException {
             this(new Position(headRow, headCol), new Position(heartRow, heartCol));
     }
 
-    public Plane(Position head, Position heart) throws InvalidPlaneException {
+    /**
+             head
+     L1  L2  heart  R2  R1
+              c3
+          L3  c4   L3
+
+       <-- VectorLeft
+        |   VectorEnd
+       \|/
+    **/
+    public Plane(Position head, Position heart) throws BoardException {
         this.head = head;
         this.heart = heart;
 
@@ -38,7 +75,7 @@ public class Plane {
         try {
             vectorEnd = new Vector(heart.row - head.row, heart.col - head.col);
             vectorLeft = new Vector(heart.col - head.col, head.row - heart.row);
-            vectorRight = new Vector(heart.col - head.col,  heart.row - head.row);
+            vectorRight = new Vector(head.col - heart.col,  heart.row - head.row);
             Position C3 = heart.add(vectorEnd);
             Position C4 = heart.add(vectorEnd).add(vectorEnd);
             Position L3 = C4.add(vectorLeft);
@@ -47,19 +84,27 @@ public class Plane {
             Position L1 = L2.add(vectorLeft);
             Position R2 = heart.add(vectorRight);
             Position R1 = R2.add(vectorRight);
-            body.add(head);
-            body.add(L1);
-            body.add(L2);
-            body.add(heart);
-            body.add(R2);
-            body.add(R1);
-            body.add(C3);
-            body.add(L3);
-            body.add(C4);
-            body.add(R3);
+            addPlanePart(head);
+            addPlanePart(L1);
+            addPlanePart(L2);
+            addPlanePart(heart);
+            addPlanePart(R2);
+            addPlanePart(R1);
+            addPlanePart(C3);
+            addPlanePart(L3);
+            addPlanePart(C4);
+            addPlanePart(R3);
         } catch (Position.InvalidPositionException e) {
-            e.printStackTrace();
+//            e.printStackTrace();
             throw new InvalidPlaneException();
+        }
+    }
+
+    private void addPlanePart(Position p) throws InvalidPlaneException {
+        if (body.contains(p)) {
+            throw new InvalidPlaneException();
+        } else {
+            body.add(p);
         }
     }
 
@@ -94,16 +139,15 @@ public class Plane {
     public static void main(String[] args) {
         Plane p = null;
         try {
-            p = new Plane(9,7, 8,7);
-        } catch (InvalidPlaneException e) {
-            e.printStackTrace();
-        } catch (Position.InvalidPositionException e) {
+//            p =  new Plane(3, 8, 3, 7);
+            p = new Plane(9, 7, 8, 7);
+        } catch (BoardException e) {
             e.printStackTrace();
         }
         p.printBodyList();
     }
     
-    public class InvalidPlaneException extends Exception {
+    public class InvalidPlaneException extends BoardException {
         InvalidPlaneException() {
             super("Invalid plane with head : " + head.toString() + " and heart : " + heart.toString());
         }
